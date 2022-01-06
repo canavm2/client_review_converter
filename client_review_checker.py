@@ -29,13 +29,15 @@ class client:
         self.review_et = 0
         self.review_deadline_et = 0
         
-# this opens a .csv file in the format that the lpl export function currently (1/4/2022) exports it into
-# column 1 is client name
-# column 2 is the date the client has been workign with me, "Client since date"
-# column 3 is the date of the clients last recorded review
+# uses tkinter and PATH to get an absolute path for the input file
 file_name = filedialog.askopenfilename()
 print(file_name)
 read_csv = Path(file_name)
+
+# this opens a .csv file in the format that the lpl export function currently (1/4/2022) exports it into
+# column 1 is the date of the clients last recorded review
+# column 2 is the client name
+# column 11 is the date the client has been workign with me, "Client since date"
 with open(read_csv) as csvfile:
     data = csv.reader(csvfile)
     i=0
@@ -66,6 +68,8 @@ for client in client_list:
     client.review_deadline = datetime.date.strftime(client.review_deadline, "%m/%d/%Y")  
     if (client.review_et + year_in_seconds) < review_deadline:
         needed_reviews.append(client)
+
+# this writes the clients who need reviews to an external file stored int eh same directory
 
 write_csv = Path('clients_needing_reviews.csv')
 with open(write_csv, 'w', newline='') as csvfile:
