@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# client info
+clients_needing_reviews.csv
+
 # C extensions
 *.so
 
